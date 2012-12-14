@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+                        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="gremo_subscription.class">Gremo\SubscriptionBundle\Model\BaseSubscription</parameter>
+        <parameter key="gremo_subscription_factory.class">Gremo\SubscriptionBundle\Factory\BaseSubscriptionFactory</parameter>
+    </parameters>
+
+    <services>
+        <service id="gremo_subscription_factory" class="%gremo_subscription_factory.class%">
+            <argument>%gremo_subscription.interval%</argument>
+        </service>
+        <service id="gremo_subscription" class="%gremo_subscription.class%"
+            factory-service="gremo_subscription_factory" factory-method="getSubscription">
+        </service>
+    </services>
+
+</container>
